@@ -1,7 +1,7 @@
 MIT License
 ===========
 
-Copyright (c) 2012 Frank Bardon Jr & Chase Hutchins
+Copyright (c) 2012 Frank Bardon Jr
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
