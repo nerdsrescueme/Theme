@@ -3,7 +3,8 @@
 namespace Theme;
 
 use Nerd\Arr
-  , Nerd\Asset\Collection as AssetCollection;
+  , Nerd\Asset\Collection as AssetCollection
+  , \Nerd\Design\Architectural\MVC\View;
 
 class Theme implements \Nerd\Design\Initializable
 {
@@ -45,6 +46,7 @@ class Theme implements \Nerd\Design\Initializable
 
     public $js;
     public $css;
+	public $template;
 
     public function __construct($theme = 'default', array $config = [])
     {
@@ -56,8 +58,8 @@ class Theme implements \Nerd\Design\Initializable
         $this->path   = $this->config('root').DS.$theme;
         $this->public = strpos($this->path, \Nerd\DOCROOT) !== false;
         $this->uri    = trim(str_replace(\Nerd\DOCROOT, '', $this->path), DS);
-        $this->js     = new AssetCollection([], $this->uri.DS.'assets');
-        $this->css    = new AssetCollection([], $this->uri.DS.'assets');
+        $this->js     = new AssetCollection([], $this->uri.'/'.'assets');
+        $this->css    = new AssetCollection([], $this->uri.'/'.'assets');
 
         // Attempt to load theme information file...
         if ($this->config('info.enabled', false)) {
@@ -69,6 +71,10 @@ class Theme implements \Nerd\Design\Initializable
                 $this->info = $parser->to($data);
             }
         }
+
+		// Import information file assets into assets arrays
+		$this->js->add($this->info('js', []));
+		$this->css->add($this->info('css', []));
     }
 
     public function config($key, $default = null)
@@ -80,4 +86,18 @@ class Theme implements \Nerd\Design\Initializable
     {
         return Arr::get($this->info, $key, $default);
     }
+
+	public function view($view, $data = [], $path = null)
+	{
+		return new View($view, $data, $this->path.DS.'layouts');
+	}
+
+	public function template($template = 'template')
+	{
+		if ($this->template[$template] === null) {
+			$this->template[$template] = new View($template, [], $this->path.DS.'templates');
+		}
+
+		return $this->template[$template];
+	}
 }
