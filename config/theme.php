@@ -11,7 +11,9 @@ return array_merge([
 
 	'root' => join(DS, [\Nerd\DOCROOT, 'themes']),
 
-	'default' => 'default',
+	'theme' => 'default',
+
+	'fallback' => 'default',
 
 	'info' => [
 
