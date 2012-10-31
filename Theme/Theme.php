@@ -63,7 +63,7 @@ class Theme implements \Nerd\Design\Initializable
         $handle = opendir($root);
 
         while (($dir = readdir($handle)) !== false) {
-            if (substr($dir, 0, 1) != '.') {
+            if (strpos($dir, '.theme') !== false) {
                 static::$themes[$dir] = ucfirst($dir);
             }
         }
@@ -83,7 +83,7 @@ class Theme implements \Nerd\Design\Initializable
 	 */
     public static function instance($theme = 'default', array $config = [])
     {
-        return new static($theme, $config);
+        return new static("$theme.theme", $config);
     }
 
 	/**
