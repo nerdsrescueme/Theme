@@ -153,7 +153,7 @@ class Theme extends \Geek\Design\Task
         return <<<HELP
 
 Usage:
-  geek nerd.theme[.task] [args] [flags]
+  geek theme.theme[.task] [args] [flags]
 
 Tasks:
   all                    -- List all installed themes

@@ -10,7 +10,7 @@ namespace Theme;
 
 use Nerd\Arr
   , Nerd\Asset\Collection as AssetCollection
-  , \Nerd\Design\Architectural\MVC\View;
+  , Nerd\Design\Architectural\MVC\View;
 
 /**
  * Theme Factory Class
