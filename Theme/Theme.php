@@ -147,6 +147,18 @@ class Theme implements \Nerd\Design\Initializable
     public $fallback;
 
     /**
+     * Layouts within this theme
+     *
+     * [
+     *   'filename' => 'layout',
+     *   'home.php' => 'home'
+     * ]
+     *
+     * @var array
+     */
+    public $layouts = [];
+
+    /**
      * Constructor
      *
      * Create an instance of this theme object. This method first attemts to load the
@@ -190,6 +202,18 @@ class Theme implements \Nerd\Design\Initializable
                 $this->info = $parser->to($data);
             }
         }
+
+        // Get a list of all available layouts for this theme
+        $handle = opendir($this->path.DS.'layouts');
+
+        while (($file = readdir($handle)) !== false) {
+            if (substr($file, 0, 1) != '.') {
+                $file = str_replace('.php', '', $file);
+                $this->layouts[$file] = \Nerd\Str::humanize($file);
+            }
+        }
+
+        closedir($handle);
 
         // Import information file assets into assets arrays
         $this->js->add($this->info('assets.js', []));
