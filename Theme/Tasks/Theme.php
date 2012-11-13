@@ -156,10 +156,10 @@ Usage:
   geek theme.theme[.task] [args] [flags]
 
 Tasks:
-  all                    -- List all installed themes
-  install {REPO} {THEME} -- Install a theme from a github repo
-  remove  {THEME}        -- Uninstall a theme
-  update  {THEME}        -- Update a theme from its source repo
+  all                       -- List all installed themes
+  install    {REPO} {THEME} -- Install a theme from a github repo
+  uninstall  {THEME}        -- Uninstall a theme
+  update     {THEME}        -- Update a theme from its source repo
 
 Runtime options:
   None at this time
